@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Joey C on 11/12/2015.
- * Version 0.0.0.1
+ * Version 0.0.0.2
  */
 
 // if exit code = 0 project was manually exited
@@ -51,13 +51,18 @@ public class Client {
             else if(choice==6){
                 sortAllGamesByRating(catalog);
             }
-            else if(choice==7){
-                int x = Integer.parseInt(JOptionPane.showInputDialog(" 1. Exit \n 2. Cancel"));
-                if(x==1)
-                System.exit(0);
+            else if(choice==7) {
+                try {
+                    int x = Integer.parseInt(JOptionPane.showInputDialog(" 1. Cancel \n 2. Exit  "));
+                    if (x == 2)
+                        System.exit(0);
 
-                if (x==2)
-                choice=menu();
+                    if (x == 1)
+                        menu();
+                }
+                catch(NumberFormatException e){
+                    menu();
+                }
             }
 
 
@@ -86,10 +91,16 @@ public class Client {
     }
 
     private static void printAllAboveRating(ArrayList<VideoGame> catalog) {
-        double s = Double.parseDouble(JOptionPane.showInputDialog("Input Rating number"));
-        for (int i = 0;i<catalog.size();i++)
-            if(catalog.get(i).getRating()>s)
-                JOptionPane.showMessageDialog(null,catalog.get(i));
+        try {
+            double s = Double.parseDouble(JOptionPane.showInputDialog("Input Rating number"));
+            for (int i = 0; i < catalog.size(); i++)
+                if (catalog.get(i).getRating() > s)
+                    JOptionPane.showMessageDialog(null, catalog.get(i));
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Imporoper Input");
+        }
+
     }
 
     private static void printAllGamesByPublisher(ArrayList<VideoGame> catalog) {
@@ -124,7 +135,7 @@ public class Client {
             catalog.add(catalog.size(),temp);
         }
         catch (NumberFormatException e){
-        JOptionPane.showMessageDialog(null,"Improper input");
+        JOptionPane.showMessageDialog(null,"Improper Input");
         }
     }
 
