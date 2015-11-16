@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
+
 /**
  * Created by Joey C on 11/12/2015.
+ * Version 0.0.0.1
  */
 
-// if exit code = -1 project was manually exited
+// if exit code = 0 project was manually exited
 // if exit code = 1 project crashed
 
 
@@ -24,14 +26,20 @@ public class Client {
 
         while(choice!=-1){
             //code
+
             if(choice==1) {
                 printAll(catalog);
             }
             else if(choice==2) {
                 inputNewGame(catalog);
             }
-            else if(choice==3){
-                JOptionPane.showInputDialog(catalog.get(searchByTitle(catalog)));
+            else if(choice==3) {
+                try {
+                    JOptionPane.showMessageDialog(null,catalog.get(searchByTitle(catalog)));
+                }
+                catch(ArrayIndexOutOfBoundsException e){
+                    JOptionPane.showMessageDialog(null,"Improper input");
+                }
             }
             else if(choice==4){
                 printAllGamesByPublisher(catalog);
@@ -46,9 +54,9 @@ public class Client {
             else if(choice==7){
                 int x = Integer.parseInt(JOptionPane.showInputDialog(" 1. Exit \n 2. Cancel"));
                 if(x==1)
-                System.exit(-1);
+                System.exit(0);
 
-                if (x ==2)
+                if (x==2)
                 choice=menu();
             }
 
@@ -106,19 +114,30 @@ public class Client {
      }
 
     private static void inputNewGame(ArrayList<VideoGame> catalog) {
+
         String title = JOptionPane.showInputDialog("Enter game Title");
         String publisher = JOptionPane.showInputDialog("Enter game Publisher");
-        int rating = Integer.parseInt(JOptionPane.showInputDialog("Enter game Rating"));
-        int esbr = Integer.parseInt(JOptionPane.showInputDialog("Enter game esbr"));
-
-        VideoGame temp = new VideoGame(title,publisher,rating,esbr);
-        catalog.add(catalog.size(),temp);
+        try {
+            int rating = Integer.parseInt(JOptionPane.showInputDialog("Enter game Rating"));
+            int esbr = Integer.parseInt(JOptionPane.showInputDialog("Enter game esbr"));
+            VideoGame temp = new VideoGame(title,publisher,rating,esbr);
+            catalog.add(catalog.size(),temp);
+        }
+        catch (NumberFormatException e){
+        JOptionPane.showMessageDialog(null,"Improper input");
+        }
     }
 
     private static int menu() {
-        String s = JOptionPane.showInputDialog(""+"1. Print entire catalog\n 2. Enter a new game into catalog\n" +
-                " 3. Search for game in catalog by title\n 4. Print all games by publisher\n 5. Print all games above rating\n " +
-                "6. Sort all games by rating \n 7.Quit\n\n\n Enter Choice:");
-        return Integer.parseInt(s);
+      try {
+          String s = JOptionPane.showInputDialog("" + "1. Print entire catalog\n 2. Enter a new game into catalog\n" +
+                  " 3. Search for game in catalog by title\n 4. Print all games by publisher\n 5. Print all games above rating\n " +
+                  "6. Sort all games by rating \n 7.Quit\n\n\n Enter Choice:");
+          return Integer.parseInt(s);
+      }
+      catch(NumberFormatException e){
+            menu();
+        }
+        return -1;
     }
 }
