@@ -4,6 +4,11 @@ import java.util.ArrayList;
 /**
  * Created by Joey C on 11/12/2015.
  */
+
+// if exit code = -1 project was manually exited
+// if exit code = 1 project crashed
+
+
 public class Client {
     public static void main(String arg[]) {
         ArrayList<VideoGame> catalog = new ArrayList<VideoGame>();
@@ -17,7 +22,7 @@ public class Client {
         catalog.add(catalog.size(),temp1);
         catalog.add(catalog.size(),temp2);
 
-        while(choice!=7){
+        while(choice!=-1){
             //code
             if(choice==1) {
                 printAll(catalog);
@@ -38,6 +43,15 @@ public class Client {
             else if(choice==6){
                 sortAllGamesByRating(catalog);
             }
+            else if(choice==7){
+                int x = Integer.parseInt(JOptionPane.showInputDialog(" 1. Exit \n 2. Cancel"));
+                if(x==1)
+                System.exit(-1);
+
+                if (x ==2)
+                choice=menu();
+            }
+
 
             choice=menu();
         }
