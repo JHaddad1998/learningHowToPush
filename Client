@@ -1,0 +1,78 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
+/**
+ * Created by Joey C on 11/12/2015.
+ */
+public class Client {
+    public static void main(String arg[]) {
+        ArrayList<VideoGame> catalog = new ArrayList<VideoGame>();
+        int choice;
+        choice = menu();
+
+        VideoGame temp = new VideoGame("Black Ops 1","Activision",4,4);
+        VideoGame temp1 = new VideoGame("Black Ops 2","Activision",5,4);
+        VideoGame temp2 = new VideoGame("Black Ops 3","Activision",2,4);
+        catalog.add(catalog.size(),temp);
+        catalog.add(catalog.size(),temp1);
+        catalog.add(catalog.size(),temp2);
+
+        while(choice!=7){
+            //code
+            if(choice==1) {
+                printAll(catalog);
+            }
+            else if(choice==2) {
+                inputNewGame(catalog);
+            }
+            else if(choice==3){
+                JOptionPane.showInputDialog(catalog.get(searchByTitle(catalog)));
+            }
+            else if(choice==4){
+                printAllGamesByPublisher(catalog);
+            }
+
+
+
+            choice=menu();
+        }
+    }
+
+    private static void printAllGamesByPublisher(ArrayList<VideoGame> catalog) {
+        for (catalog :s  
+             ) {
+            
+        }
+    }
+
+    private static int searchByTitle(ArrayList<VideoGame> catalog) {
+        String s = JOptionPane.showInputDialog("Type in Title");
+        for(int i=0;i<catalog.size();i++)
+            if(catalog.get(i).getTitle().equalsIgnoreCase(s))
+                return i;
+
+        return -1;
+    }
+
+    private static void printAll(ArrayList<VideoGame> catalog) {
+            JOptionPane.showMessageDialog(null,catalog.toString());
+     }
+
+
+    private static void inputNewGame(ArrayList<VideoGame> catalog) {
+        String title = JOptionPane.showInputDialog("Enter game Title");
+        String publisher = JOptionPane.showInputDialog("Enter game Publisher");
+        int rating = Integer.parseInt(JOptionPane.showInputDialog("Enter game Rating"));
+        int esbr = Integer.parseInt(JOptionPane.showInputDialog("Enter game esbr"));
+
+        VideoGame temp = new VideoGame(title,publisher,rating,esbr);
+        catalog.add(catalog.size(),temp);
+    }
+
+    private static int menu() {
+        String s = JOptionPane.showInputDialog(""+"1. Print entire catalog\n 2. Enter a new game into catalog\n" +
+                " 3. Search for game in catalog by title\n 4. Print all games by publisher\n 5. Print all games above rating\n " +
+                "6. Sort all games by rating \n 7.Quit\n\n\n Enter Choice:");
+        return Integer.parseInt(s);
+    }
+}
