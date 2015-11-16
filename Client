@@ -31,18 +31,51 @@ public class Client {
             else if(choice==4){
                 printAllGamesByPublisher(catalog);
             }
+            else if(choice==5){
+                printAllAboveRating(catalog);
+            }
 
-
+            else if(choice==6){
+                sortAllGamesByRating(catalog);
+            }
 
             choice=menu();
         }
     }
 
-    private static void printAllGamesByPublisher(ArrayList<VideoGame> catalog) {
-        for (catalog :s  
-             ) {
-            
+    private static void sortAllGamesByRating(ArrayList<VideoGame> c) {
+        if (c.size()>1) // check if the number of orders is larger than 1
+        {
+            VideoGame temp;
+            for (int x=0; x<c.size(); x++) // bubble sort outer loop
+            {
+                for (int i=0; i < c.size()-i; i++) {
+                    if (c.get(i).getRating()-(c.get(i+1).getRating()) > 0)
+                    {
+                        temp = c.get(i);
+                        c.set(i,c.get(i+1) );
+                        c.set(i+1, temp);
+                    }
+                }
+            }
         }
+        JOptionPane.showMessageDialog(null,"ArrayList sorted");
+
+    }
+
+    private static void printAllAboveRating(ArrayList<VideoGame> catalog) {
+        double s = Double.parseDouble(JOptionPane.showInputDialog("Input Rating number"));
+        for (int i = 0;i<catalog.size();i++)
+            if(catalog.get(i).getRating()>s)
+                JOptionPane.showMessageDialog(null,catalog.get(i));
+    }
+
+    private static void printAllGamesByPublisher(ArrayList<VideoGame> catalog) {
+        String s =JOptionPane.showInputDialog("Input Publisher name");
+        for (int i = 0;i<catalog.size();i++)
+            if (catalog.get(i).getPublisher().equalsIgnoreCase(s))
+                JOptionPane.showMessageDialog(null,catalog.get(i));
+
     }
 
     private static int searchByTitle(ArrayList<VideoGame> catalog) {
@@ -57,7 +90,6 @@ public class Client {
     private static void printAll(ArrayList<VideoGame> catalog) {
             JOptionPane.showMessageDialog(null,catalog.toString());
      }
-
 
     private static void inputNewGame(ArrayList<VideoGame> catalog) {
         String title = JOptionPane.showInputDialog("Enter game Title");
