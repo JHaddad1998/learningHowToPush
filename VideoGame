@@ -1,0 +1,87 @@
+/**
+ * Created by Joey C on 11/12/2015.
+ */
+public class VideoGame {
+    private String title;
+    private String publisher;
+    private int rating;
+    //new way for limited Strings
+    public static final int EVERYONE=0,TEEN=1,EARLYCHILDHOOD=2,EVERYONE10=3,MATURE=4,ADULTSONLY=5,PENDING=6;
+    private int esrb=TEEN;
+
+
+    public VideoGame(String title, String publisher, int rating, int esrb) {
+        this.title = title;
+        this.publisher = publisher;
+        this.rating = rating;
+        this.esrb = esrb;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public static int getEVERYONE() {
+        return EVERYONE;
+    }
+
+    public static int getTEEN() {
+        return TEEN;
+    }
+
+    public static int getEARLYCHILDHOOD() {
+        return EARLYCHILDHOOD;
+    }
+
+    public static int getEVERYONE10() {
+        return EVERYONE10;
+    }
+
+    public static int getMATURE() {
+        return MATURE;
+    }
+
+    public static int getADULTSONLY() {
+        return ADULTSONLY;
+    }
+
+    public static int getPENDING() {
+        return PENDING;
+    }
+
+    public int getEsrb() {
+        return esrb;
+    }
+
+    public void setEsrb(int esrb) {
+        this.esrb = esrb;
+    }
+
+    @Override
+    public String toString() {
+        return          "   Title: " + title +
+                "   Publisher: " + publisher +
+                "   Rating: " + rating +
+                "   Esrb: " + esrb+"     ";
+    }
+}
