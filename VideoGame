@@ -6,7 +6,7 @@ public class VideoGame {
     private String publisher;
     private int rating;
     //new way for limited Strings
-    public static final int EVERYONE=0,TEEN=1,EARLYCHILDHOOD=2,EVERYONE10=3,MATURE=4,ADULTSONLY=5,PENDING=6;
+    public static final int EVERYONE=0,TEEN=3,EARLYCHILDHOOD=2,EVERYONE10=1,MATURE=4,ADULTSONLY=5,PENDING=6;
     private int esrb=TEEN;
 
 
@@ -79,9 +79,27 @@ public class VideoGame {
 
     @Override
     public String toString() {
-        return          "   Title: " + title +
+        String ratingWord = "";
+        if (rating==0)
+            ratingWord="EVERYONE";
+        else if(rating==1)
+            ratingWord="EVERYONE10";
+        else if(rating==2)
+            ratingWord="EARLYCHILDHOOD";
+        else if(rating==3)
+            ratingWord="TEEN";
+        else if(rating==4)
+            ratingWord="MATURE";
+        else if(rating==5)
+            ratingWord="ADULTSONLY";
+        else if(rating==6)
+            ratingWord="PENDING";
+        else
+        ratingWord="???";
+
+            return          "   Title: " + title +
                 "   Publisher: " + publisher +
-                "   Rating: " + rating +
+                "   Rating: " + ratingWord +
                 "   Esrb: " + esrb+"     ";
     }
 }
