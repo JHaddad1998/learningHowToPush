@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by JOE C on 11/12/2015.
- * Version 0.0.0.3
+ * Created by Joey C on 11/12/2015.
+ * Version 0.0.0.4
  */
 
 // if exit code = 0 project was manually exited
@@ -29,12 +29,7 @@ public class Client {
                 inputNewGame(catalog);
             }
             else if(choice==3) {
-                try {
-                    JOptionPane.showMessageDialog(null,catalog.get(searchByTitle(catalog)));
-                }
-                catch(ArrayIndexOutOfBoundsException e){
-                    JOptionPane.showMessageDialog(null,"Improper input");
-                }
+                searchByTitle(catalog);
             }
             else if(choice==4){
                 printAllGamesByPublisher(catalog);
@@ -42,7 +37,6 @@ public class Client {
             else if(choice==5){
                 printAllAboveRating(catalog);
             }
-
             else if(choice==6){
                 sortAllGamesByRating(catalog);
             }
@@ -55,12 +49,11 @@ public class Client {
     }
 
     private static void tempVideoGames(ArrayList<VideoGame> catalog) {
-        VideoGame temp = new VideoGame("Black Ops 1","Activision",4,4);
-        VideoGame temp1 = new VideoGame("Starcraft 2","Blizzard",5,4);
-        VideoGame temp2 = new VideoGame("GTA 5","Rock Star Studio",2,4);
-        catalog.add(catalog.size(),temp);
-        catalog.add(catalog.size(),temp1);
-        catalog.add(catalog.size(),temp2);
+        catalog.add(catalog.size(),new VideoGame("Starcraft 2","Blizzard",5,4));
+        catalog.add(catalog.size(),new VideoGame("GTA 5","Rock Star Studio",2,4));
+        catalog.add(catalog.size(),new VideoGame("Black Ops 2","Activision",1,4));
+        catalog.add(catalog.size(),new VideoGame("Black Ops","Activision",5,4));
+        catalog.add(catalog.size(),new VideoGame("Black Ops 3","Activision",3,4));
     }
 
     private static void sortAllGamesByRating(ArrayList<VideoGame> c) {
@@ -98,19 +91,22 @@ public class Client {
 
     private static void printAllGamesByPublisher(ArrayList<VideoGame> catalog) {
         String s =JOptionPane.showInputDialog("Input Publisher name");
-        for (int i = 0;i<catalog.size();i++)
-            if (catalog.get(i).getPublisher().equalsIgnoreCase(s))
-                JOptionPane.showMessageDialog(null,catalog.get(i));
-
+        String total="";
+        for(VideoGame x: catalog){
+            if(x.getPublisher().equalsIgnoreCase(s))
+                total+=x.toString();
+        }
+        JOptionPane.showMessageDialog(null,total);
     }
 
-    private static int searchByTitle(ArrayList<VideoGame> catalog) {
-        String s = JOptionPane.showInputDialog("Type in Title");
+    private static void searchByTitle(ArrayList<VideoGame> catalog) {
+        String key = JOptionPane.showInputDialog("Type in Title");
         for(int i=0;i<catalog.size();i++)
-            if(catalog.get(i).getTitle().equalsIgnoreCase(s))
-                return i;
-
-        return -1;
+            if(catalog.get(i).getTitle().equalsIgnoreCase(key)) {
+            JOptionPane.showMessageDialog(null,catalog.get(i));
+                return;
+            }
+        JOptionPane.showMessageDialog(null,"Title not found");
     }
 
     private static void printAll(ArrayList<VideoGame> catalog) {
