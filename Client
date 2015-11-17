@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by Joey C on 11/12/2015.
- * Version 0.0.0.2
+ * Created by JOE C on 11/12/2015.
+ * Version 0.0.0.3
  */
 
 // if exit code = 0 project was manually exited
@@ -15,15 +15,10 @@ public class Client {
     public static void main(String arg[]) {
         ArrayList<VideoGame> catalog = new ArrayList<VideoGame>();
         int choice;
+        tempVideoGames(catalog);
+
+
         choice = menu();
-
-        VideoGame temp = new VideoGame("Black Ops 1","Activision",4,4);
-        VideoGame temp1 = new VideoGame("Black Ops 2","Activision",5,4);
-        VideoGame temp2 = new VideoGame("Black Ops 3","Activision",2,4);
-        catalog.add(catalog.size(),temp);
-        catalog.add(catalog.size(),temp1);
-        catalog.add(catalog.size(),temp2);
-
         while(choice!=-1){
             //code
 
@@ -52,22 +47,20 @@ public class Client {
                 sortAllGamesByRating(catalog);
             }
             else if(choice==7) {
-                try {
-                    int x = Integer.parseInt(JOptionPane.showInputDialog(" 1. Cancel \n 2. Exit  "));
-                    if (x == 2)
-                        System.exit(0);
-
-                    if (x == 1)
-                        menu();
-                }
-                catch(NumberFormatException e){
-                    menu();
-                }
+                System.exit(0);
             }
-
-
             choice=menu();
         }
+        choice=menu();
+    }
+
+    private static void tempVideoGames(ArrayList<VideoGame> catalog) {
+        VideoGame temp = new VideoGame("Black Ops 1","Activision",4,4);
+        VideoGame temp1 = new VideoGame("Starcraft 2","Blizzard",5,4);
+        VideoGame temp2 = new VideoGame("GTA 5","Rock Star Studio",2,4);
+        catalog.add(catalog.size(),temp);
+        catalog.add(catalog.size(),temp1);
+        catalog.add(catalog.size(),temp2);
     }
 
     private static void sortAllGamesByRating(ArrayList<VideoGame> c) {
@@ -121,8 +114,8 @@ public class Client {
     }
 
     private static void printAll(ArrayList<VideoGame> catalog) {
-            JOptionPane.showMessageDialog(null,catalog.toString());
-     }
+        JOptionPane.showMessageDialog(null,catalog.toString());
+    }
 
     private static void inputNewGame(ArrayList<VideoGame> catalog) {
 
@@ -132,22 +125,22 @@ public class Client {
             int rating = Integer.parseInt(JOptionPane.showInputDialog("Enter game Rating"));
             int esbr = Integer.parseInt(JOptionPane.showInputDialog("Enter game esbr"));
             VideoGame temp = new VideoGame(title,publisher,rating,esbr);
-            catalog.add(catalog.size(),temp);
+            catalog.add(new VideoGame(title,publisher,rating,esbr));
         }
         catch (NumberFormatException e){
-        JOptionPane.showMessageDialog(null,"Improper Input");
+            JOptionPane.showMessageDialog(null,"Improper Input");
         }
     }
 
     private static int menu() {
-      try {
-          String s = JOptionPane.showInputDialog("" + "1. Print entire catalog\n 2. Enter a new game into catalog\n" +
-                  " 3. Search for game in catalog by title\n 4. Print all games by publisher\n 5. Print all games above rating\n " +
-                  "6. Sort all games by rating \n 7.Quit\n\n\n Enter Choice:");
-          return Integer.parseInt(s);
-      }
-      catch(NumberFormatException e){
-            menu();
+        try {
+            String s = JOptionPane.showInputDialog("" + "1. Print entire catalog\n 2. Enter a new game into catalog\n" +
+                    " 3. Search for game in catalog by title\n 4. Print all games by publisher\n 5. Print all games above rating\n " +
+                    "6. Sort all games by rating \n 7.Quit\n\n\n Enter Choice:");
+            return Integer.parseInt(s);
+        }
+        catch(NumberFormatException e){
+        menu();
         }
         return -1;
     }
